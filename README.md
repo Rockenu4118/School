@@ -2,3 +2,5 @@
 Programming assignments for CS2, Data Structures and Algorithms.
 
 ## Lab-1 (Lowest Score Drop)
+
+## Lab-2 (Chips and Salsa)
