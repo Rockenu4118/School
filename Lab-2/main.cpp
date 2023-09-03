@@ -10,11 +10,21 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
+using std::setw;
+using std::setfill;
+using std::left;
+
+
+void getSales(string salsaNames[5], int salsaSales[5]);
+void calcTotalSales(int salsaSales[5], int& totalSales);
+void calcHighLowSellers(string salsaNames[5], int salsaSales[5], string& highestSeller, string& lowestSeller);
+void displaySalesData(string salsaNames[5], int salsaSales[5], int totalSales, string highestSeller, string lowestSeller);
 
 
 int main()
@@ -25,26 +35,44 @@ int main()
     string highestSeller;
     string lowestSeller;
     
-    // Enter sales data
+
+    getSales(salsaNames, salsaSales);
+    
+    calcTotalSales(salsaSales, totalSales);
+    
+    calcHighLowSellers(salsaNames, salsaSales, highestSeller, lowestSeller);
+
+    displaySalesData(salsaNames, salsaSales, totalSales, highestSeller, lowestSeller);
+    
+
+    return 0;
+}
+
+void getSales(string salsaNames[5], int salsaSales[5])
+{
     for (int i = 0 ; i < 5 ; i++)
     {
         cout << "Enter sales for " << salsaNames[i] << " salsa..." << endl;
         cin >> salsaSales[i];
-        
-        while(salsaSales[i] < 0)
+
+        while (salsaSales[i] < 0)
         {
             cout << "Invalid input, no negative values. Please try again..." << endl;
             cin >> salsaSales[i];
         }
     }
-    
-    // Calculate total sales
+}
+
+void calcTotalSales(int salsaSales[5], int& totalSales)
+{
     for (int i = 0 ; i < 5 ; i++)
     {
         totalSales = totalSales + salsaSales[i];
     }
-    
-    // Calculate best and worst performers
+}
+
+void calcHighLowSellers(string salsaNames[5], int salsaSales[5], string& highestSeller, string& lowestSeller)
+{
     int iHigh = 0;
     int iLow = 0;
     
@@ -58,23 +86,22 @@ int main()
             iLow = i;
         }
     }
-    
+
     highestSeller = salsaNames[iHigh];
     lowestSeller = salsaNames[iLow];
-    
-    // Display sales data
-    cout << "\nDisplaying sales data...\n" << endl;
+}
+
+void displaySalesData(string salsaNames[5], int salsaSales[5], int totalSales, string highestSeller, string lowestSeller)
+{
+    cout << "\nSales Data...\n" << endl;
     
     for (int i = 0 ; i < 5 ; i++)
-    {
-        cout << salsaNames[i] << ": " << salsaSales[i] << endl;
+    {   
+        cout << setw(16) << left << salsaNames[i];
+        cout << salsaSales[i] << " jars" << endl;
     }
     
-    cout << "\nTotal sales: " << totalSales << endl;
-    
-    cout << "\nHighest seller: " << highestSeller << endl;
-    cout << "Lowest seller: " << lowestSeller << endl;
-    
-    
-    return 0;
+    cout << setw(16) << left << "Total sales"    << totalSales    << " jars" << endl;
+    cout << setw(16) << left << "Highest seller" << highestSeller << endl;
+    cout << setw(16) << left << "Lowest seller"  << lowestSeller  << endl;
 }
