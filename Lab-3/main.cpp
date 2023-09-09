@@ -36,9 +36,6 @@ int main()
     cout << "\nDisplaying nums2 sorting process..." << endl;
     selectionSort(nums2, SIZE);
     
-    
-    
-    
     return 0;
 }
 
@@ -75,7 +72,24 @@ void bubbleSort(int nums[], int size)
 
 void selectionSort(int nums[], int size)
 {
-    
+    int minIndex;
+
+    for (int i = 0; i < size - 1 ; i++)
+    {
+        minIndex = i;
+        for (int j = i + 1 ; j < size ; j++)
+        {
+            if (nums[j] < nums[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex != i) {
+            swap(nums[minIndex], nums[i]);
+        }
+
+        displayArrayContents(nums, size);
+    }
 }
 
 void swap(int& a, int& b)
