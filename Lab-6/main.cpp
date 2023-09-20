@@ -69,15 +69,15 @@ struct Customer
     string city;
     string state;
     int    zipCode;
-    int    telephone;
+    string telephone;
     double accountBalance;
     string dateLastPayment;
 };
 
 void displayMenu(int& selection);
 void createAccount(Customer customers[], int& customerCount);
-void modifyAccount();
-void displayAllAccounts();
+void modifyAccount(Customer customers[], int customerCount);
+void displayAllAccounts(Customer customers[], int customerCount);
 
 
 int main()
@@ -94,13 +94,13 @@ int main()
         
         switch (selection) {
             case 1:
-                 createAccount(customers, customerCount);
+                createAccount(customers, customerCount);
                 break;
             case 2:
-                // modifyAccount();
+                modifyAccount(customers, customerCount);
                 break;
             case 3:
-                // displayAllAccounts();
+                displayAllAccounts(customers, customerCount);
                 break;
             case 4:
                 cout << "Closing account menu..." << endl;
@@ -114,6 +114,18 @@ int main()
     
     
     return 0;
+}
+
+void displayMenu(int& selection)
+{
+    cout << "Account Menu, please select an option...\n" << endl;
+    cout << "1. Enter new account information" << endl;
+    cout << "2. Change account information" << endl;
+    cout << "3. Display all account information" << endl;
+    cout << "4. Exit the program" << endl;
+    
+    cout << "\nSelection: ";
+    cin >> selection;
 }
 
 void createAccount(Customer customers[], int& customerCount)
@@ -137,18 +149,53 @@ void createAccount(Customer customers[], int& customerCount)
     cin  >> customers[customerCount].dateLastPayment;
     
     cout << "You have entered information for customer number " << customerCount << endl;
+    cout << endl;
     
     customerCount++;
 }
 
-void displayMenu(int& selection)
+void modifyAccount(Customer customers[], int customerCount)
 {
-    cout << "Account Menu, please select an option...\n" << endl;
-    cout << "1. Enter new account information" << endl;
-    cout << "2. Change account information" << endl;
-    cout << "3. Display all account information" << endl;
-    cout << "4. Exit the program" << endl;
+    int customerNum;
+
+    if (customerCount == 0) {
+        cout << "No customer accounts available.\n" << endl;
+        return;
+    }
     
-    cout << "\nSelection: ";
-    cin >> selection;
+    do 
+    {
+        cout << "Customer number: ";
+        cin >> customerNum;
+        
+        if (!(customerNum < customerCount) || (customerNum < 0)) {
+            cout << "Invalid customer number, please try again!" << endl;
+        }
+    }
+    while (!(customerNum < customerCount) || (customerNum < 0));
+
+    
+}
+
+void displayAllAccounts(Customer customers[], int customerCount)
+{
+    if (customerCount == 0) {
+        cout << "No customer accounts available.\n\n";
+    } else {
+        cout << "Displaying all accounts...\n\n";
+    }
+
+    for (int i = 0 ; i < customerCount ; i++)
+    {
+        cout << "Customer number: "      << customerCount                << endl;
+        cout << "Customer name: "        << customers[i].name            << endl; 
+        cout << "Customer address: "     << customers[i].address         << endl;
+        cout << "City: "                 << customers[i].city            << endl;
+        cout << "State: "                << customers[i].state           << endl;
+        cout << "ZIP code: "             << customers[i].zipCode         << endl;
+        cout << "Telephone: "            << customers[i].telephone       << endl;
+        cout << "Account balance: "      << customers[i].accountBalance  << endl;
+        cout << "Date of last payment: " << customers[i].dateLastPayment << endl;
+        cout << endl;
+    }
 }
