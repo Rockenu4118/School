@@ -78,6 +78,7 @@ void displayMenu(int& selection);
 void createAccount(Customer customers[], int& customerCount);
 void modifyAccount(Customer customers[], int customerCount);
 void displayAllAccounts(Customer customers[], int customerCount);
+void displayAccount(Customer customer, int customerNum);
 
 
 int main()
@@ -126,27 +127,30 @@ void displayMenu(int& selection)
     
     cout << "\nSelection: ";
     cin >> selection;
+    cin.ignore();
 }
 
 void createAccount(Customer customers[], int& customerCount)
 {
     cout << "Please enter info for customer #" << customerCount << ": " << endl;
     cout << "Customer name: ";
-    cin  >> customers[customerCount].name;
+    getline(cin, customers[customerCount].name);
     cout << "Customer address: ";
-    cin  >> customers[customerCount].address;
+    getline(cin, customers[customerCount].address);
     cout << "City: ";
-    cin  >> customers[customerCount].city;
+    getline(cin, customers[customerCount].city);
     cout << "State: ";
-    cin  >> customers[customerCount].state;
+    getline(cin, customers[customerCount].state);
     cout << "ZIP code: ";
     cin  >> customers[customerCount].zipCode;
+    cin.ignore();
     cout << "Telephone: ";
-    cin  >> customers[customerCount].telephone;
+    getline(cin, customers[customerCount].telephone);
     cout << "Account balance: ";
     cin  >> customers[customerCount].accountBalance;
+    cin.ignore();
     cout << "Date of last payment: ";
-    cin  >> customers[customerCount].dateLastPayment;
+    getline(cin, customers[customerCount].dateLastPayment);
     
     cout << "You have entered information for customer number " << customerCount << endl;
     cout << endl;
@@ -167,6 +171,7 @@ void modifyAccount(Customer customers[], int customerCount)
     {
         cout << "Customer number: ";
         cin >> customerNum;
+        cin.ignore();
         
         if (!(customerNum < customerCount) || (customerNum < 0)) {
             cout << "Invalid customer number, please try again!" << endl;
@@ -174,28 +179,63 @@ void modifyAccount(Customer customers[], int customerCount)
     }
     while (!(customerNum < customerCount) || (customerNum < 0));
 
+    displayAccount(customers[customerNum], customerNum);
+    cout << endl;
+    cout << endl;
+
+    cout << "Please enter new info for customer #" << customerNum << ": " << endl;
+    cout << "Customer name: ";
+    getline(cin, customers[customerNum].name);
+    cout << "Customer address: ";
+    getline(cin, customers[customerNum].address);
+    cout << "City: ";
+    getline(cin, customers[customerNum].city);
+    cout << "State: ";
+    getline(cin, customers[customerNum].state);
+    cout << "ZIP code: ";
+    cin  >> customers[customerNum].zipCode;
+    cin.ignore();
+    cout << "Telephone: ";
+    getline(cin, customers[customerNum].telephone);
+    cout << "Account balance: ";
+    cin  >> customers[customerNum].accountBalance;
+    cin.ignore();
+    cout << "Date of last payment: ";
+    getline(cin, customers[customerNum].dateLastPayment);
     
+    cout << "You have modified information for customer number " << customerCount << endl;
+    cout << endl;
 }
 
 void displayAllAccounts(Customer customers[], int customerCount)
 {
     if (customerCount == 0) {
-        cout << "No customer accounts available.\n\n";
+        cout << "\nNo customer accounts available.\n\n";
+        return;
     } else {
-        cout << "Displaying all accounts...\n\n";
+        cout << "\nDisplaying all accounts...\n\n";
     }
 
     for (int i = 0 ; i < customerCount ; i++)
     {
-        cout << "Customer number: "      << customerCount                << endl;
-        cout << "Customer name: "        << customers[i].name            << endl; 
-        cout << "Customer address: "     << customers[i].address         << endl;
-        cout << "City: "                 << customers[i].city            << endl;
-        cout << "State: "                << customers[i].state           << endl;
-        cout << "ZIP code: "             << customers[i].zipCode         << endl;
-        cout << "Telephone: "            << customers[i].telephone       << endl;
-        cout << "Account balance: "      << customers[i].accountBalance  << endl;
-        cout << "Date of last payment: " << customers[i].dateLastPayment << endl;
+        cout << "Customer number: " << i << endl;
+        displayAccount(customers[i], i);
         cout << endl;
     }
+
+    cout << "Press enter to continue...";
+    cin.get();
 }
+
+void displayAccount(Customer customer, int customerNum)
+{
+    cout << "Customer name: "        << customer.name            << endl; 
+    cout << "Customer address: "     << customer.address         << endl;
+    cout << "City: "                 << customer.city            << endl;
+    cout << "State: "                << customer.state           << endl;
+    cout << "ZIP code: "             << customer.zipCode         << endl;
+    cout << "Telephone: "            << customer.telephone       << endl;
+    cout << "Account balance: "      << customer.accountBalance  << endl;
+    cout << "Date of last payment: " << customer.dateLastPayment << endl;
+}
+
