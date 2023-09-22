@@ -126,8 +126,8 @@ void printPayRoll(PayRoll payRoll[], int size)
     {
         cout << "Employee #"       << i 
              << ", Hours worked: " << setprecision(2) << payRoll[i].getHoursWorked() 
-             << ", Hourly rate: "  << setprecision(2) << payRoll[i].getHourlyRate()
-             << ", Gross pay: "    << setprecision(2) << payRoll[i].getGross()
+             << ", Hourly rate: $"  << setprecision(2) << payRoll[i].getHourlyRate()
+             << ", Gross pay: $"    << setprecision(2) << payRoll[i].getGross()
              << endl;
     }
 }
