@@ -5,10 +5,14 @@ Programming assignments for CS2, Data Structures and Algorithms.
 
 ## Lab-2 (Chips and Salsa)
 
-## Lab-3
+## Lab-3 (Sorting Orders)
 
-## Lab-4
+## Lab-4 (Grade Book)
 
-## Lab-5
+## Lab-5 (Test Scores #1)
 
-## Lab-6
+## Lab-6 (Customer Account)
+
+## Lab-7 (Payroll)
+
+## Lab-8 (Number Array)
