@@ -11,3 +11,43 @@
 // • Return the highest value store in the array.
 // • Return the lowest value stored in the array
 // • Return the average of all the numbers stored in the array
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+
+class NumberArray
+{
+    public:
+        // Constructor and Destructor
+        NumberArray(int size);
+        ~NumberArray();
+        
+
+    private:
+        float* _nums;
+        int    _size;
+
+};
+
+int main()
+{
+    cout << "Program running..." << endl;
+
+
+
+    return 0;
+}
+
+NumberArray::NumberArray(int size)
+{
+    _nums = new float[size];
+    _size = size;
+}
+
+NumberArray::~NumberArray()
+{
+    delete[] _nums;
+}
