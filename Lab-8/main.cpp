@@ -11,13 +11,17 @@
 // • Return the highest value store in the array.
 // • Return the lowest value stored in the array
 // • Return the average of all the numbers stored in the array
+//
+// Demonstrate the Class in a Program
 
 #include <iostream>
 
 using std::cout;
 using std::endl;
 
-
+/**************************************
+    NumberArray Class Declaration
+**************************************/
 class NumberArray
 {
     public:
@@ -26,8 +30,8 @@ class NumberArray
         ~NumberArray();
     
         // Utility
-        void  storeNum(float num, int index);
-        float getFirstNum();
+        void  storeNum(int index, float num);
+        float getAnyNum(int index);
         float getHighNum();
         float getLowNum();
         float getAvgNum();
@@ -38,15 +42,37 @@ class NumberArray
         int    _size;
 };
 
+/**************************************
+    Main
+**************************************/
 int main()
 {
-    cout << "Program running..." << endl;
+    cout << "Creating a Float Class Array Object with a size of 5 using storeNum function with nums (1.4, 2.3, 3.13, 6.66, 7.711) to load array." << endl;
+    NumberArray myArray = NumberArray(5);
 
-    
+    myArray.storeNum(0, 1.4);
+    myArray.storeNum(1, 2.3);
+    myArray.storeNum(2, 3.13);
+    myArray.storeNum(3, 6.66);
+    myArray.storeNum(4, 7.711);
+
+    cout << "Using getAnyNum with all legitmate index values to print array." << endl;
+    cout << "The value of myArray[0]: " << myArray.getAnyNum(0) << endl;
+    cout << "The value of myArray[1]: " << myArray.getAnyNum(1) << endl;
+    cout << "The value of myArray[2]: " << myArray.getAnyNum(2) << endl;
+    cout << "The value of myArray[3]: " << myArray.getAnyNum(3) << endl;
+    cout << "The value of myArray[4]: " << myArray.getAnyNum(4) << endl;
+
+    cout << "Highest number: " << myArray.getHighNum() << endl;
+    cout << "Lowest number:  " << myArray.getLowNum()  << endl;
+    cout << "Average number: " << myArray.getAvgNum()  << endl;
 
     return 0;
 }
 
+/**************************************
+    NumberArray Class Definition
+**************************************/
 NumberArray::NumberArray(int size)
 {
     _nums = new float[size];
@@ -58,13 +84,52 @@ NumberArray::~NumberArray()
     delete[] _nums;
 }
 
-void NumberArray::storeNum(float num, int index)
+void NumberArray::storeNum(int index, float num)
 {
     _nums[index] = num;
 }
 
-float NumberArray::getFirstNum()
+float NumberArray::getAnyNum(int index)
 {
-    return _nums[0];
+    return _nums[index];
 }
 
+float NumberArray::getHighNum()
+{
+    float high = _nums[0];
+
+    for (int i = 0 ; i < _size ; i++)
+    {
+        if (_nums[i] > high) {
+            high = _nums[i];
+        }
+    }
+
+    return high;
+}
+
+float NumberArray::getLowNum()
+{
+    float low = _nums[0];
+
+    for (int i = 0 ; i < _size ; i++)
+    {
+        if (_nums[i] < low){
+            low = _nums[i]; 
+        }
+    }
+
+    return low;
+}
+
+float NumberArray::getAvgNum()
+{
+    float sum = 0;
+
+    for (int i = 0 ; i < _size ; i++)
+    {
+        sum += _nums[i];
+    }
+
+    return sum / _size;
+}
