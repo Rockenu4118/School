@@ -24,19 +24,25 @@ class NumberArray
         // Constructor and Destructor
         NumberArray(int size);
         ~NumberArray();
+    
+        // Utility
+        void  storeNum(float num, int index);
+        float getFirstNum();
+        float getHighNum();
+        float getLowNum();
+        float getAvgNum();
         
-
     private:
+        // Members
         float* _nums;
         int    _size;
-
 };
 
 int main()
 {
     cout << "Program running..." << endl;
 
-
+    
 
     return 0;
 }
@@ -51,3 +57,14 @@ NumberArray::~NumberArray()
 {
     delete[] _nums;
 }
+
+void NumberArray::storeNum(float num, int index)
+{
+    _nums[index] = num;
+}
+
+float NumberArray::getFirstNum()
+{
+    return _nums[0];
+}
+
