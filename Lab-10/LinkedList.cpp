@@ -11,7 +11,25 @@ LinkedList::LinkedList()
 
 LinkedList::~LinkedList()
 {
-    // TODO
+    if (_head == nullptr) 
+    {
+        cout << "List was empty." << endl;
+        return;
+    }
+
+    ListNode* temp1 = _head;
+    ListNode* temp2 = temp1->_next;
+
+    while (temp1 != nullptr)
+    {
+        delete temp1;
+        temp1 = temp2;
+
+        if (temp2->_next != nullptr)
+        {
+            temp2 = temp2->_next;
+        }
+    }
 }
 
 void LinkedList::appendNode(int val)
@@ -67,14 +85,13 @@ void LinkedList::insertNode(int val, int location)
 
     while (nodeNum != location - 1)
     {
-        temp1 = temp1->_next;
-
         if (temp1->_next == nullptr)
         {
             temp2 = nullptr;
             break;
         }
 
+        temp1 = temp1->_next;
         temp2 = temp1->_next;
         
         nodeNum++;
