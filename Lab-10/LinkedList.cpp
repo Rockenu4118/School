@@ -41,7 +41,47 @@ void LinkedList::appendNode(int val)
 
 void LinkedList::insertNode(int val, int location)
 {
-    // TODO
+    ListNode* newNode = new ListNode;
+    newNode->_val     = val;
+
+    // If list is empty, point head to newNode
+    if (_head == nullptr)
+    {
+        _head        = newNode;
+        _head->_next = nullptr;
+        return;
+    }
+
+    // If intended insert location is 0, make the newNode point to the current head
+    // Make the newNode the new head of the list
+    if (location == 0)
+    {
+        newNode->_next = _head;
+        _head          = newNode;
+        return;
+    }
+
+    ListNode* temp1   = _head;
+    ListNode* temp2   = temp1->_next;
+    int       nodeNum = 0;
+
+    while (nodeNum != location - 1)
+    {
+        temp1 = temp1->_next;
+
+        if (temp1->_next == nullptr)
+        {
+            temp2 = nullptr;
+            break;
+        }
+
+        temp2 = temp1->_next;
+        
+        nodeNum++;
+    }
+
+    temp1->_next = newNode;
+    newNode->_next = temp2;
 }
 
 void LinkedList::deleteNode()
@@ -70,10 +110,12 @@ void LinkedList::displayVals()
         return;
     }
 
+    cout << "Displaying vals: ";
     ListNode* temp = _head;
     while (temp != nullptr)
     {
-        cout << temp->_val << " " << endl;
+        cout << temp->_val << " ";
         temp = temp->_next;
     }
+    cout << endl;
 }
