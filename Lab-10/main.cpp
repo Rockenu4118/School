@@ -12,21 +12,24 @@ using namespace std;
 
 int main()
 {
-    std::cout << "Program running..." << std::endl;
     LinkedList list = LinkedList();
 
+    cout << "Appendings vals" << endl;
     list.appendNode(10);
     list.appendNode(22);
     list.appendNode(3);
     list.appendNode(17);
     list.appendNode(8);
-
-    list.deleteNode();
-    
+    list.appendNode(72);
     list.displayVals();
 
+    cout << "Inserting 50 at position 3" << endl;
+    list.insertNode(50, 3);
+    list.displayVals();
 
-
+    cout << "Deleting last node" << endl;
+    list.deleteNode();
+    list.displayVals();
 
     return 0;
 }
