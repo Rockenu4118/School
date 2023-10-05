@@ -20,7 +20,7 @@ LinkedList::~LinkedList()
     ListNode* temp1 = _head;
     ListNode* temp2 = temp1->_next;
 
-    while (temp1 != nullptr)
+    while (temp2 != nullptr)
     {
         delete temp1;
         temp1 = temp2;
