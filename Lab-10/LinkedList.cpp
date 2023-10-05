@@ -105,6 +105,12 @@ void LinkedList::deleteNode()
         return;
     }
 
+    if (_head->_next == nullptr)
+    {
+        delete _head;
+        _head = nullptr;
+    }
+
     ListNode* temp = _head;
     while (temp->_next->_next != nullptr)
     {
