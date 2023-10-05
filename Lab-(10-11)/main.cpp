@@ -39,5 +39,11 @@ int main()
     list.deleteNode();
     list.displayVals();
 
+    cout << "Searching for 17" << endl;
+    cout << "Location: " << list.search(17) << endl;
+
+    cout << "Searching for 100" << endl;
+    cout << "Location: " << list.search(100) << endl;
+
     return 0;
 }
