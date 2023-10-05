@@ -11,20 +11,9 @@ LinkedList::LinkedList()
 
 LinkedList::~LinkedList()
 {
-    if (_head == nullptr) 
+    while (_head != nullptr)
     {
-        cout << "List was empty." << endl;
-        return;
-    }
-
-    ListNode* temp1 = _head;
-    ListNode* temp2 = temp1->_next;
-
-    while (temp1 != nullptr)
-    {
-        temp2 = temp1->_next;
-        delete temp1;
-        temp1 = temp2;
+        deleteNode();
     }
 }
 
@@ -109,6 +98,7 @@ void LinkedList::deleteNode()
     {
         delete _head;
         _head = nullptr;
+        return;
     }
 
     ListNode* temp = _head;
