@@ -1,3 +1,6 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include <string>
 
 using namespace std;
@@ -19,3 +22,5 @@ class Stack
         int     _stackSize;
         int     _top;
 };
+
+#endif
