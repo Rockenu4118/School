@@ -1,47 +1,44 @@
-// Write your own version of a class that will create a stactic stack of 
-// String data type. The static stack class needs to have  the following members:
+// Write your own version of a class that will create a Dynamic Queue of 
+// double data type.The dynamic queue class needs to have  the following members:
+//
+// Member Functions. Constructor, Destructor, enqueue, dequeue, isEmpty,and clear. 
 // 
-// 1. Member Variables. stackArray (a pointer variable which is going to be used 
-// to dynamically  allocate an array for storage), stacksize (an integer to hold the 
-// size of the stack) and top (an integer that is used to mark the top of the stack).
-//
-// 2. Member Functions. Constructor  (it accepts an integer argument that specifies 
-// the size of the stak), Destructor, isFull, isEmpty, pop, and push. 
-//
 // Demonstrate the class with a driver program.
-
 
 #include <iostream>
 
-#include "./Stack.hpp"
+#include "./Queue.hpp"
 
 using namespace std;
 
 int main()
 {
-    cout << "Program running..." << endl;
+    Queue queue;
 
-    Stack  stack = Stack(4);
-    string string1;
-    string string2;
+    queue.printQueue();
 
-    stack.pop(string1);
+    queue.enqueue(10.5);
+    queue.enqueue(7.8);
+    queue.enqueue(14.1);
+    queue.enqueue(22.9);
 
-    stack.push("hello");
-    stack.push("word1");
-    stack.push("test");
-    stack.push("another");
-    stack.push("last");
+    queue.printQueue();
 
-    stack.printStack();
+    double test;
 
-    stack.pop(string1);
-    cout << "Popped word 1: " << string1 << endl;
+    queue.dequeue(test);
+    cout << "Dequeue: " << test << endl;
+
+    queue.dequeue(test);
+    cout << "Dequeue: " << test << endl;
+
+    queue.printQueue();
+
+    queue.clear();
+
+    queue.printQueue();
+
+    queue.dequeue(test);
     
-    stack.pop(string2);
-    cout << "Popped word 2: " << string2 << endl;
-    
-    stack.printStack();
-
     return 0;
 }
