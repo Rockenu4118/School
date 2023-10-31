@@ -33,3 +33,15 @@ int A(int m, int n)
         return A(m-1, A(m, n-1));
     }
 }
+
+int pwr(int num, int pwr);
+
+int pwr(int num, int pwr)
+{
+    if (pwr == 0)
+    {
+        return 1;
+    }
+
+    return num * pwr(num, pwr - 1);
+}
