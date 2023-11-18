@@ -110,6 +110,35 @@ class BinaryTree
             }
         }
 
+        int treeHeight(TreeNode* nodePtr)
+        {
+            if (nodePtr == nullptr)
+                return 0;
+            else
+            {
+                int leftHeight = treeHeight(nodePtr->_left);
+                int rightHeight = treeHeight(nodePtr->_right);
+
+                if (leftHeight > rightHeight)
+                    return (leftHeight + 1);
+                else
+                    return (rightHeight + 1);
+            }
+        }
+
+        int nodeCount(TreeNode* nodePtr)
+        {
+            if (nodePtr == nullptr)
+                return 0;
+            else
+            {
+                int leftCount = nodeCount(nodePtr->_left);
+                int rightCount = nodeCount(nodePtr->_right);
+
+                return (1 + leftCount + rightCount);
+            }
+        }
+
     public:
         BinaryTree()
         {
@@ -119,6 +148,16 @@ class BinaryTree
         ~BinaryTree()
         {
             destroySubTree(_root);
+        }
+
+        int getTreeHeight()
+        {
+            return treeHeight(_root);
+        }
+
+        int getNodeCount()
+        {
+            return nodeCount(_root);
         }
 
         void insertNode(T item)
