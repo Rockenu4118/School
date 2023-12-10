@@ -41,7 +41,7 @@ int main()
     cout << "Enter customer's first name: ";
     cin >> inputStr;
     cin.ignore();
-    customer1.setLastName(inputStr);
+    customer1.setFirstName(inputStr);
     cout << "Enter customer's address: ";
     getline(cin, inputStr);
     customer1.setAddress(inputStr);
