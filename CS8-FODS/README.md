@@ -1,2 +1,2 @@
 # CS8
-Labs for CS8, Foundations of Data Science
+Labs for CS8, Foundations of Data Science.
