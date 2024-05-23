@@ -13,7 +13,7 @@ class null_ptr_exception : public logic_error
 template <typename T>
 class smart_ptr {
     public:
-        smart_ptr() : ptr_(nullptr), ref_(nullptr) {}
+        smart_ptr() noexcept : ptr_(nullptr), ref_(nullptr) {}
         // Create a smart_ptr that is initialized to nullptr. The reference count
         // should be initialized to nullptr.
 
@@ -28,7 +28,17 @@ class smart_ptr {
         explicit smart_ptr(T* &&raw_ptr)
         {
             ptr_ = raw_ptr;
-            ref_ = new int(1);
+
+            try
+            {
+                ref_ = new int(1);
+            }
+            catch(const std::exception& e)
+            {
+                delete ptr_;
+                std::cerr << e.what() << '\n';
+                throw;
+            }
         }
         // Create a smart_ptr that is initialized to raw_ptr. The reference count
         // should be one. If the constructor fails raw_ptr is deleted.	
@@ -55,15 +65,24 @@ class smart_ptr {
 
         smart_ptr& operator=(const smart_ptr& rhs) noexcept
         {
-            delete ptr_;
-            ptr_ = rhs.ptr_;
+            if (ref_count() < 2)
+            {
+                delete ptr_;
+                delete ref_;
+            } 
+            else
+            {
+                *ref_ = *ref_ - 1;
+            }
 
-            delete ref_;
+            ptr_ = rhs.ptr_;
             ref_ = rhs.ref_;
-            
-            *ref_ = *ref_ + 1;
+
+            if (ref_ != nullptr)
+                *ref_ = *ref_ + 1;
 
             return *this;
+
         }
         // This assignment should make a shallow copy of the right-hand side's
         // pointer data. The reference count should be incremented as appropriate.
@@ -91,7 +110,7 @@ class smart_ptr {
                 return false;
 
             // Create tmp pointers for allocation
-            T* tmpPtr = nullptr;
+            T*   tmpPtr = nullptr;
             int* tmpRef = nullptr;
 
             // Make sure allocations are able to go through before modifying
@@ -101,12 +120,12 @@ class smart_ptr {
                 tmpPtr = new T(*ptr_);
                 tmpRef = new int(1);
             }
-            catch(const std::exception& e)
+            catch(const std::bad_alloc& e)
             {
                 delete tmpPtr;
                 delete tmpRef;
                 std::cerr << e.what() << '\n';
-                return false;
+                throw;
             }
             
             ptr_ = tmpPtr;
