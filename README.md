@@ -1,5 +1,5 @@
-# School
-## EL Camino College
+# School Programming Assignments
+## El Camino College
 ### CS2 - Data structures and algorithms
 ### CS3 - Computer Programming in Java
 ### CS8 - Foundations of Data Science
